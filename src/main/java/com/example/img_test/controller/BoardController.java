@@ -5,7 +5,7 @@ import com.example.img_test.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +34,7 @@ public class BoardController {
         Board board = boardService.findBoard(id).orElseThrow(RuntimeException::new);
         String imgPath = board.getStoredFileName();
         log.info(imgPath);
-        return "<img src="+"build/libs/"+ imgPath + ">";
+        return "<img src="+"/home/ubuntu/obok_backend_serv/build/libs/"+ imgPath + ">";
     }
 
 }
