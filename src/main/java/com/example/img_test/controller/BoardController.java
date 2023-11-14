@@ -34,7 +34,7 @@ public class BoardController {
         Board board = boardService.findBoard(id).orElseThrow(RuntimeException::new);
         String imgPath = board.getStoredFileName();
         log.info(imgPath);
-        return "<img src="+ imgPath + ">";
+        return "<img src="+"build/libs/"+ imgPath + ">";
     }
 
 }
