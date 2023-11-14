@@ -34,7 +34,7 @@ public class BoardController {
         Board board = boardService.findBoard(id).orElseThrow(RuntimeException::new);
         String imgPath = board.getStoredFileName();
         log.info(imgPath);
-        return "<img src="+"/home/ubuntu/obok_backend_serv/build/libs/"+ imgPath + ">";
+        return "<img src="+ imgPath + ">";
     }
 
 }
