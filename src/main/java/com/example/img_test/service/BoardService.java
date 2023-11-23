@@ -17,20 +17,22 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     private final FileHandler fileHandler;
+    private final PythonService pythonService;
+
 
     @Autowired
-    public BoardService(BoardRepository boardRepository) {
+    public BoardService(BoardRepository boardRepository, PythonService pythonService) {
         this.boardRepository = boardRepository;
         this.fileHandler = new FileHandler();
+        this.pythonService = pythonService;
     }
 
-    public Board addBoard(
+    public String addBoard(
             Board board,
             List<MultipartFile> files
     ) throws Exception {
         // 파일을 저장하고 그 Board 에 대한 list 를 가지고 있는다
         List<Board> list = fileHandler.parseFileInfo(board.getId(), files);
-
         if (list.isEmpty()){
             // TODO : 파일이 없을 땐 어떻게 해야할까.. 고민을 해보아야 할 것
         }
@@ -41,8 +43,12 @@ public class BoardService {
                 pictureBeans.add(boardRepository.save(boards));
             }
         }
+        boardRepository.save(board);
+        //board.getStoredFileName()
+        //"home/ubuntu/images/20231123/17538750605390.jpg"
+        String address = pythonService.runPythonScript("/home/ubuntu/pyfile/pyex_5.py",list.get(0).getStoredFileName());
 
-        return boardRepository.save(board);
+        return address;
     }
 
     public List<Board> findBoards() {

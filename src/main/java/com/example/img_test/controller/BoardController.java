@@ -1,14 +1,15 @@
 package com.example.img_test.controller;
-
 import com.example.img_test.entity.Board;
 import com.example.img_test.service.BoardService;
+import com.example.img_test.service.PythonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.util.List;
 
@@ -18,7 +19,9 @@ import java.util.List;
 public class BoardController {
     
     private final BoardService boardService;
+    private final PythonService pythonService;
 
+/*
     @PostMapping("/board")
     public ResponseEntity<?> createBoard(
             @Validated @RequestParam("files") List<MultipartFile> files
@@ -28,6 +31,18 @@ public class BoardController {
 
         return ResponseEntity.ok().build();
     }
+ */
+
+    @PostMapping("/image_learn")
+    public ResponseEntity<String> createBoard(
+            @Validated @RequestParam("files") List<MultipartFile> files
+    ) throws Exception {
+        String ret = boardService.addBoard(Board.builder()
+                .build(), files);
+
+        return ResponseEntity.ok().body("images/"+ret); // 추후 수정 필요 deep_images
+    }
+
 
     @GetMapping("/board")
     public String getBoard(@RequestParam long id) {
@@ -36,5 +51,7 @@ public class BoardController {
         log.info(imgPath);
         return "<img src="+ imgPath + ">";
     }
+
+
 
 }
