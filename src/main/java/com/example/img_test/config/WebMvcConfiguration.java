@@ -9,6 +9,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("file:///home/ubuntu/");
+        registry.addResourceHandler("/**").addResourceLocations("file:///home/mooner92/");
     }
 }

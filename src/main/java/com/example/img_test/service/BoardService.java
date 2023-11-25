@@ -46,7 +46,7 @@ public class BoardService {
         boardRepository.save(board);
         //board.getStoredFileName()
         //"home/ubuntu/images/20231123/17538750605390.jpg"
-        String address = pythonService.runPythonScript("/home/ubuntu/pyfile/pyex_5.py",list.get(0).getStoredFileName());
+        String address = pythonService.runPythonScript("/home/mooner92/pyfile/pyex_1.py",list.get(0).getStoredFileName());
 
         return address;
     }
