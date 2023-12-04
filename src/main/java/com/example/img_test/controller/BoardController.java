@@ -1,5 +1,6 @@
 package com.example.img_test.controller;
 import com.example.img_test.entity.Board;
+import com.example.img_test.entity.Data;
 import com.example.img_test.service.BoardService;
 import com.example.img_test.service.PythonService;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +41,12 @@ public class BoardController {
         String ret = boardService.addBoard(Board.builder()
                 .build(), files);
 
-        return ResponseEntity.ok().body("images/"+ret); // 추후 수정 필요 deep_images
+        return ResponseEntity.ok().body("home/"+ret); // 추후 수정 필요 deep_images
+    }
+
+    @GetMapping("/location_data")
+    public Data getData() {
+        return new Data();
     }
 
 
