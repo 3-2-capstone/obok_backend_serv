@@ -57,7 +57,7 @@ public class BoardController {
     public Data getData() {
         return new Data();
     }
-
+    /*
     @PostMapping("/image_learn_1")
     public ResponseEntity<String> createBoard1(
             @Validated @RequestParam(value = "files", required = false) List<MultipartFile> files
@@ -70,6 +70,7 @@ public class BoardController {
         String ret = boardService.addBoard(Board.builder().build(), files);
         return ResponseEntity.ok().body(ret);
     }
+     */
 
 
     @GetMapping("/board")
@@ -85,25 +86,35 @@ public class BoardController {
         String imgPath = "file:///home/mooner92/obok/deep_images/" + id + ".jpg"; // 이미지 경로 설정
         return "<img src="+ imgPath + ">";
     }
-
      */
     @GetMapping("/return_img/{id}")
     public ResponseEntity<byte[]> getBoardImage(@PathVariable long id) throws IOException {
         String imagePath = "/home/mooner92/obok/deep_images/" + id + ".jpg";
-
         // 이미지 파일을 읽어 바이트 배열로 변환
         File imageFile = new File(imagePath);
         byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
-
         return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
     }
     @GetMapping("/return_txt")
     public String getBoard2(@RequestParam long id) {
         try {
             String txtValue = readTextFile("/home/mooner92/obok/deep_images/labels/" + id + ".txt"); // 텍스트 내용 가져오기
+            return txtValue;
+        } catch (IOException e) {
+            // 예외 처리
+            return "Error: " + e.getMessage();
+        }
+    }
+
+    @GetMapping("/return_txt/{id}")
+    public String getBoardTxt(@PathVariable String id) throws IOException {
+        try {
+            String txtValue = readTextFile("/home/mooner92/obok/deep_images/labels/" + id + ".txt"); // 텍스트 내용 가져오기
+            System.out.println("/home/mooner92/obok/deep_images/labels/" + id + ".txt");
+            System.out.println("-------------------------");
+            System.out.println(txtValue);
             return txtValue;
         } catch (IOException e) {
             // 예외 처리
