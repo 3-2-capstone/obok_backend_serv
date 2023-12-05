@@ -51,8 +51,13 @@ public class BoardService {
         //board.getStoredFileName()
         //"home/ubuntu/images/20231123/17538750605390.jpg"
         //System.out.println(list.get(0).getStoredFileName());
+        System.out.println("--------------------------------------");
+        System.out.println(list.get(0).getStoredFileName());
+        System.out.println(list.get(0).getBoardIdx());
+        System.out.println(list.get(0).getFileSize());
+        System.out.println("--------------------------------------");
         String address = pythonService.runPythonScript(list.get(0).getStoredFileName());
-
+        System.out.println(address);
         return address;
     }
 

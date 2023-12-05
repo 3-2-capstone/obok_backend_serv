@@ -43,19 +43,34 @@ public class BoardController {
  */
 
     @PostMapping("/image_learn")
-    public ResponseEntity<String> createBoard(
+    public String createBoard(
             @Validated @RequestParam("files") List<MultipartFile> files
     ) throws Exception {
         String ret = boardService.addBoard(Board.builder()
                 .build(), files);
-
-        return ResponseEntity.ok().body(ret); // 추후 수정 필요 deep_images
+        System.out.println(ret);
+        //return ResponseEntity.ok().body(ret); // 추후 수정 필요 deep_images
+        return ret;
     }
 
     @GetMapping("/location_data")
     public Data getData() {
         return new Data();
     }
+
+    @PostMapping("/image_learn_1")
+    public ResponseEntity<String> createBoard1(
+            @Validated @RequestParam(value = "files", required = false) List<MultipartFile> files
+    ) throws Exception {
+        if (files == null || files.isEmpty()) {
+            // 파일이 없는 경우 처리
+            return ResponseEntity.badRequest().body("파일을 선택하세요.");
+        }
+
+        String ret = boardService.addBoard(Board.builder().build(), files);
+        return ResponseEntity.ok().body(ret);
+    }
+
 
     @GetMapping("/board")
     public String getBoard(@RequestParam long id) {
