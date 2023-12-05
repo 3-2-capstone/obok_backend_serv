@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +50,8 @@ public class BoardService {
         boardRepository.save(board);
         //board.getStoredFileName()
         //"home/ubuntu/images/20231123/17538750605390.jpg"
-        String address = pythonService.runPythonScript("/home/mooner92/obok/pyfile/pyex_1.py",list.get(0).getStoredFileName());
+        //System.out.println(list.get(0).getStoredFileName());
+        String address = pythonService.runPythonScript(list.get(0).getStoredFileName());
 
         return address;
     }
