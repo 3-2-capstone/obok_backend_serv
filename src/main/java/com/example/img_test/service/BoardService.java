@@ -48,9 +48,6 @@ public class BoardService {
             }
         }
         boardRepository.save(board);
-        //board.getStoredFileName()
-        //"home/ubuntu/images/20231123/17538750605390.jpg"
-        //System.out.println(list.get(0).getStoredFileName());
         System.out.println("--------------------------------------");
         System.out.println(list.get(0).getStoredFileName());
         System.out.println(list.get(0).getBoardIdx());

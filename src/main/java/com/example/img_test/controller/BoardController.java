@@ -30,17 +30,6 @@ public class BoardController {
     private final BoardService boardService;
     private final PythonService pythonService;
 
-/*
-    @PostMapping("/board")
-    public ResponseEntity<?> createBoard(
-            @Validated @RequestParam("files") List<MultipartFile> files
-    ) throws Exception {
-        boardService.addBoard(Board.builder()
-                .build(), files);
-
-        return ResponseEntity.ok().build();
-    }
- */
 
     @PostMapping("/image_learn")
     public String createBoard(
@@ -57,20 +46,6 @@ public class BoardController {
     public Data getData() {
         return new Data();
     }
-    /*
-    @PostMapping("/image_learn_1")
-    public ResponseEntity<String> createBoard1(
-            @Validated @RequestParam(value = "files", required = false) List<MultipartFile> files
-    ) throws Exception {
-        if (files == null || files.isEmpty()) {
-            // 파일이 없는 경우 처리
-            return ResponseEntity.badRequest().body("파일을 선택하세요.");
-        }
-
-        String ret = boardService.addBoard(Board.builder().build(), files);
-        return ResponseEntity.ok().body(ret);
-    }
-     */
 
 
     @GetMapping("/board")
@@ -80,13 +55,7 @@ public class BoardController {
         log.info(imgPath);
         return "<img src="+ imgPath + ">";
     }
-    /*
-    @GetMapping("/return_img")
-    public String getBoard1(@RequestParam long id) {
-        String imgPath = "file:///home/mooner92/obok/deep_images/" + id + ".jpg"; // 이미지 경로 설정
-        return "<img src="+ imgPath + ">";
-    }
-     */
+
     @GetMapping("/return_img/{id}")
     public ResponseEntity<byte[]> getBoardImage(@PathVariable long id) throws IOException {
         String imagePath = "/home/mooner92/obok/deep_images/" + id + ".jpg";
